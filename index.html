@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="es" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA-10 — Presentación Oficial del Robot Ideal</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: {
+                            dark: '#050814',
+                            card: '#0d1527',
+                            border: '#1e293b',
+                            cyan: '#00f3ff',
+                            purple: '#a855f7',
+                            pink: '#ec4899',
+                            blue: '#3b82f6'
+                        }
+                    },
+                    fontFamily: {
+                        orbitron: ['Orbitron', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'neon-cyan': '0 0 20px rgba(0, 243, 255, 0.4)',
+                        'neon-purple': '0 0 20px rgba(168, 85, 247, 0.4)',
+                        'glow-lg': '0 0 50px rgba(0, 243, 255, 0.25)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #050814;
+            color: #f1f5f9;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Grid pattern background */
+        .bg-grid-cyber {
+            background-size: 36px 36px;
+            background-image: 
+                linear-gradient(to right, rgba(0, 243, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 243, 255, 0.04) 1px, transparent 1px);
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: rgba(13, 21, 39, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 243, 255, 0.12);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(0, 243, 255, 0.35);
+            box-shadow: 0 0 25px rgba(0, 243, 255, 0.15);
+        }
+
+        .glow-text-cyan {
+            text-shadow: 0 0 12px rgba(0, 243, 255, 0.6);
+        }
+
+        .glow-text-purple {
+            text-shadow: 0 0 12px rgba(168, 85, 247, 0.6);
+        }
+
+        /* Scanning overlay effect */
+        .scanlines {
+            background: linear-gradient(to bottom, transparent 50%, rgba(0, 243, 255, 0.03) 51%);
+            background-size: 100% 4px;
+        }
+
+        @keyframes scan-anim {
+            0% { top: 0%; opacity: 0.9; }
+            50% { opacity: 0.5; }
+            100% { top: 98%; opacity: 0.1; }
+        }
+
+        .animate-scan-beam {
+            animation: scan-anim 3.5s infinite linear;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050814;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00f3ff;
+        }
+    </style>
+</head>
+<body class="bg-grid-cyber relative min-h-screen">
+
+    <!-- Ambient Glowing Orbs -->
+    <div class="fixed top-10 left-10 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="fixed bottom-10 right-10 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <!-- NAVBAR -->
+    <header class="sticky top-0 z-50 glass-card border-b border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Brand Logo -->
+            <a href="#" onclick="playAudio('beep')" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-cyan-500 to-purple-600 flex items-center justify-center text-slate-950 font-black shadow-neon-cyan group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-robot text-2xl text-slate-950"></i>
+                </div>
+                <div>
+                    <span class="font-orbitron font-black text-2xl tracking-wider bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">AURA-10</span>
+                    <span class="block text-[10px] text-cyan-400/80 font-mono tracking-widest uppercase">Robot Asistente Ideal</span>
+                </div>
+            </a>
+
+            <!-- Nav Links -->
+            <nav class="hidden lg:flex items-center space-x-6 text-sm font-medium text-slate-300">
+                <a href="#identificacion" onclick="playAudio('click')" class="hover:text-cyan-400 transition-colors">1. Identificación</a>
+                <a href="#descripcion" onclick="playAudio('click')" class="hover:text-cyan-400 transition-colors">2. Descripción Física</a>
+                <a href="#funciones" onclick="playAudio('click')" class="hover:text-cyan-400 transition-colors">3. Funciones</a>
+                <a href="#uso" onclick="playAudio('click')" class="hover:text-cyan-400 transition-colors">4. Entorno</a>
+                <a href="#conclusion" onclick="playAudio('click')" class="hover:text-cyan-400 transition-colors">5. Conclusión</a>
+                <a href="#presentacion-ppt" onclick="playAudio('click')" class="px-3 py-1.5 rounded-lg bg-purple-500/20 text-purple-300 border border-purple-500/40 hover:bg-purple-500/30 transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-file-powerpoint text-purple-400"></i> Slides PPT
+                </a>
+            </nav>
+
+            <!-- Actions Header -->
+            <div class="flex items-center gap-3">
+                <button id="audioToggleBtn" onclick="toggleMute()" class="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-cyan-400 text-xs font-mono transition-all flex items-center gap-2">
+                    <i id="audioIcon" class="fa-solid fa-volume-high"></i>
+                    <span class="hidden sm:inline">FX Audio</span>
+                </button>
+                <a href="#presentacion-ppt" onclick="openFullscreenPresentation()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-400 to-purple-600 hover:from-cyan-300 hover:to-purple-500 text-slate-950 font-bold text-xs font-orbitron uppercase tracking-wider shadow-neon-cyan transition-all transform hover:-translate-y-0.5">
+                    Modo Exposición
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative pt-10 pb-16 lg:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Hero Left Content -->
+            <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-mono">
+                    <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
+                    PROYECTO TECNOLÓGICO — EVALUACIÓN SOBRESALIENTE
+                </div>
+
+                <h1 class="text-4xl sm:text-6xl font-orbitron font-black text-white leading-tight">
+                    <span class="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent glow-text-cyan">AURA-10</span>
+                    <br>El Robot Asistente del Futuro
+                </h1>
+
+                <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light max-w-2xl mx-auto lg:mx-0">
+                    <strong class="text-cyan-300 font-semibold">AURA-10</strong> (<em class="not-italic text-purple-300 font-mono">Asistente Universal Robótico Avanzado</em>) es un robot humanoide biónico diseñado para transformar los hogares, escuelas y hospitales, uniendo inteligencia artificial empática, limpieza ecológica, cocina nutritiva y aprendizaje adaptativo.
+                </p>
+
+                <!-- Status Counters -->
+                <div class="grid grid-cols-3 gap-3 pt-2 max-w-md mx-auto lg:mx-0">
+                    <div class="p-3 rounded-xl glass-card text-center">
+                        <span class="text-[10px] text-slate-400 uppercase font-mono block">Batería</span>
+                        <span class="text-lg font-orbitron font-bold text-cyan-400">99.8%</span>
+                    </div>
+                    <div class="p-3 rounded-xl glass-card text-center">
+                        <span class="text-[10px] text-slate-400 uppercase font-mono block">Red IA</span>
+                        <span class="text-lg font-orbitron font-bold text-purple-400">6G Online</span>
+                    </div>
+                    <div class="p-3 rounded-xl glass-card text-center">
+                        <span class="text-[10px] text-slate-400 uppercase font-mono block">Idiomas</span>
+                        <span class="text-lg font-orbitron font-bold text-pink-400">+50 En Vivo</span>
+                    </div>
+                </div>
+
+                <!-- Call to action buttons -->
+                <div class="pt-4 flex flex-wrap justify-center lg:justify-start gap-4">
+                    <a href="#funciones" onclick="playAudio('scan')" class="px-6 py-3.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-orbitron font-bold text-xs uppercase tracking-wider shadow-neon-cyan transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-play"></i> Probar Simulador Live
+                    </a>
+                    <a href="#descripcion" onclick="playAudio('click')" class="px-6 py-3.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-200 font-medium text-xs border border-slate-700 transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-eye text-cyan-400"></i> Inspeccionar Anatomía
+                    </a>
+                </div>
+            </div>
+
+            <!-- Hero Right Interactive Robot Showcase (SVG/Canvas Interactive) -->
+            <div class="lg:col-span-5 flex justify-center">
+                <div class="relative w-full max-w-md aspect-square rounded-3xl glass-card p-6 shadow-glow-lg flex flex-col items-center justify-between border border-cyan-500/30 overflow-hidden group">
+                    
+                    <!-- Scanlines & Beam overlay -->
+                    <div class="absolute inset-0 scanlines pointer-events-none"></div>
+                    <div class="absolute w-full h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent top-0 animate-scan-beam"></div>
+
+                    <!-- Header Status bar inside card -->
+                    <div class="w-full flex justify-between items-center text-xs font-mono text-slate-400 z-10">
+                        <span class="text-cyan-400 flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                            DIAGNÓSTICO EN VIVO
+                        </span>
+                        <span id="heroRobotStatus" class="text-purple-300">MODO ESPERA ACTIVO</span>
+                    </div>
+
+                    <!-- Interactive SVG Robot Graphic -->
+                    <div class="relative w-64 h-64 my-2 flex items-center justify-center cursor-pointer" onclick="triggerRobotReaction()" title="¡Haz clic en el robot para interactuar!">
+                        
+                        <svg viewBox="0 0 200 240" class="w-full h-full drop-shadow-neon-cyan transition-transform duration-300 group-hover:scale-105">
+                            <!-- Base Omnidireccional -->
+                            <ellipse cx="100" cy="212" rx="60" ry="16" fill="#090d16" stroke="#00f3ff" stroke-width="2.5" />
+                            <ellipse cx="100" cy="212" rx="42" ry="9" fill="#1e293b" />
+                            <!-- Wheel Lights -->
+                            <circle cx="55" cy="212" r="3.5" fill="#00f3ff" class="animate-pulse" />
+                            <circle cx="100" cy="219" r="3.5" fill="#a855f7" class="animate-pulse" />
+                            <circle cx="145" cy="212" r="3.5" fill="#00f3ff" class="animate-pulse" />
+
+                            <!-- Bionic Legs / Core Stand -->
+                            <path d="M 85 170 L 80 205 L 120 205 L 115 170 Z" fill="#334155" stroke="#00f3ff" stroke-width="1.5" />
+
+                            <!-- Main Body Core Torso -->
+                            <path d="M 65 95 Q 100 80 135 95 L 125 175 Q 100 185 75 175 Z" fill="#f8fafc" stroke="#00f3ff" stroke-width="2.5" />
+                            
+                            <!-- Carbon Fiber Side Panels -->
+                            <path d="M 70 105 L 78 168 Q 74 172 70 162 Z" fill="#1e293b" />
+                            <path d="M 130 105 L 122 168 Q 126 172 130 162 Z" fill="#1e293b" />
+
+                            <!-- Glowing Core Reactor (Chest) -->
+                            <circle cx="100" cy="132" r="15" fill="#050814" stroke="#a855f7" stroke-width="2" />
+                            <circle id="chestReactor" cx="100" cy="132" r="9" fill="#00f3ff" class="animate-pulse" />
+
+                            <!-- Articulated Arms -->
+                            <!-- Left Arm -->
+                            <path id="leftArm" d="M 65 100 Q 45 120 50 155" fill="none" stroke="#94a3b8" stroke-width="7" stroke-linecap="round" />
+                            <circle cx="50" cy="155" r="5.5" fill="#00f3ff" />
+
+                            <!-- Right Arm -->
+                            <path id="rightArm" d="M 135 100 Q 155 120 150 155" fill="none" stroke="#94a3b8" stroke-width="7" stroke-linecap="round" />
+                            <circle cx="150" cy="155" r="5.5" fill="#a855f7" />
+
+                            <!-- Neck -->
+                            <rect x="92" y="70" width="16" height="16" rx="3" fill="#475569" />
+
+                            <!-- Head Assembly -->
+                            <path d="M 66 48 Q 100 30 134 48 Q 140 76 100 78 Q 60 76 66 48 Z" fill="#ffffff" stroke="#00f3ff" stroke-width="2.5" />
+                            
+                            <!-- Head Antenna Signals -->
+                            <line x1="100" y1="32" x2="100" y2="20" stroke="#a855f7" stroke-width="2" />
+                            <circle cx="100" cy="18" r="3" fill="#00f3ff" class="animate-ping" />
+
+                            <!-- OLED Face Visor -->
+                            <path d="M 72 52 Q 100 40 128 52 Q 130 70 100 72 Q 70 70 72 52 Z" fill="#090d16" stroke="#38bdf8" stroke-width="1.5" />
+                            
+                            <!-- Digital LED Eyes -->
+                            <circle id="eyeLeft" cx="88" cy="60" r="4.5" fill="#00f3ff" />
+                            <circle id="eyeRight" cx="112" cy="60" r="4.5" fill="#00f3ff" />
+                            <!-- Smile Arc -->
+                            <path id="faceMouth" d="M 93 67 Q 100 71 107 67" fill="none" stroke="#00f3ff" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+
+                        <!-- Tap Hint Overlay Badge -->
+                        <div class="absolute -bottom-1 bg-slate-900/90 border border-cyan-500/40 rounded-full px-3.5 py-1 text-[11px] text-cyan-300 font-mono shadow-md">
+                            <i class="fa-solid fa-hand-pointer text-cyan-400 mr-1"></i> ¡Haz Clic para Saludarte!
+                        </div>
+                    </div>
+
+                    <!-- Bottom Stat Footnote -->
+                    <div id="robotReactionText" class="w-full text-center text-xs font-mono text-slate-300 bg-slate-900/80 py-2 px-3 rounded-xl border border-slate-800">
+                        "¡Hola! Soy AURA-10. Haz clic en mis funciones para verme en acción."
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 1: IDENTIFICACIÓN DEL ROBOT -->
+    <section id="identificacion" class="py-16 border-t border-slate-800/80 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <span class="text-cyan-400 font-mono text-xs tracking-widest uppercase font-bold">SECCIÓN 1</span>
+            <h2 class="text-3xl sm:text-4xl font-orbitron font-bold text-white mt-1">Identificación del Robot</h2>
+            <p class="text-slate-400 text-sm mt-2">Datos generales y clasificación del prototipo según la consigna escolar.</p>
+            <div class="w-16 h-1 bg-gradient-to-r from-cyan-400 to-purple-500 mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <!-- Card 1: Nombre -->
+            <div class="glass-card rounded-2xl p-6 transition-all transform hover:-translate-y-1">
+                <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-xl mb-4">
+                    <i class="fa-solid fa-signature"></i>
+                </div>
+                <h3 class="text-xs font-mono text-cyan-400 uppercase tracking-wider">¿Cómo se llama tu robot?</h3>
+                <h4 class="text-2xl font-orbitron font-bold text-white mt-1 mb-2">AURA-10</h4>
+                <p class="text-slate-300 text-xs leading-relaxed">
+                    Siglas de <strong>Asistente Universal Robótico Avanzado</strong>. El número <span class="text-cyan-300 font-mono">10</span> representa la décima generación de prototipos perfeccionados con IA adaptativa.
+                </p>
+            </div>
+
+            <!-- Card 2: Categoría -->
+            <div class="glass-card rounded-2xl p-6 transition-all transform hover:-translate-y-1">
+                <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-xl mb-4">
+                    <i class="fa-solid fa-[#a855f7] fa-house-laptop"></i>
+                </div>
+                <h3 class="text-xs font-mono text-purple-400 uppercase tracking-wider">Categoría del Robot</h3>
+                <h4 class="text-xl font-orbitron font-bold text-white mt-1 mb-2">Doméstico, Educativo y Médico</h4>
+                <p class="text-slate-300 text-xs leading-relaxed">
+                    Es un robot tri-propósito: realiza labores del hogar, sirve de tutor interactivo para estudiantes y brinda asistencia básica de salud a adultos mayores.
+                </p>
+            </div>
+
+            <!-- Card 3: Formato -->
+            <div class="glass-card rounded-2xl p-6 transition-all transform hover:-translate-y-1">
+                <div class="w-12 h-12 rounded-xl bg-pink-500/10 border border-pink-500/30 flex items-center justify-center text-pink-400 text-xl mb-4">
+                    <i class="fa-solid fa-person-rays"></i>
+                </div>
+                <h3 class="text-xs font-mono text-pink-400 uppercase tracking-wider">Tipo de Estructura</h3>
+                <h4 class="text-xl font-orbitron font-bold text-white mt-1 mb-2">Humanoide Biónico</h4>
+                <p class="text-slate-300 text-xs leading-relaxed">
+                    Posee un diseño humanoide con torso, brazos articulados y rostro expresivo, montado sobre una base omnidireccional de desplazamiento ultra silencioso.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 2: DESCRIPCIÓN FÍSICA (INTERACTIVE INSPECTOR) -->
+    <section id="descripcion" class="py-16 border-t border-slate-800/80 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <span class="text-purple-400 font-mono text-xs tracking-widest uppercase font-bold">SECCIÓN 2</span>
+            <h2 class="text-3xl sm:text-4xl font-orbitron font-bold text-white mt-1">Descripción Física</h2>
+            <p class="text-slate-400 text-sm mt-2">Especificaciones de tamaño, forma, color, componentes y materiales.</p>
+            <div class="w-16 h-1 bg-gradient-to-r from-purple-500 to-cyan-400 mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- Technical Specs Summary Grid -->
+            <div class="lg:col-span-5 space-y-4">
+                <div class="glass-card p-5 rounded-2xl border-l-4 border-l-cyan-400">
+                    <div class="text-xs font-mono text-cyan-400">1. TAMAÑO Y PESO</div>
+                    <div class="text-lg font-bold font-orbitron text-white mt-0.5">Mediano — 1.50 metros | 45 kg</div>
+                    <p class="text-xs text-slate-300 mt-1">Altura perfecta para interactuar cómodamente con niños y personas sentadas o en cama.</p>
+                </div>
+
+                <div class="glass-card p-5 rounded-2xl border-l-4 border-l-purple-400">
+                    <div class="text-xs font-mono text-purple-400">2. FORMA Y ERGONOMÍA</div>
+                    <div class="text-lg font-bold font-orbitron text-white mt-0.5">Humanoide Estilizada y Curvada</div>
+                    <p class="text-xs text-slate-300 mt-1">Líneas suaves sin bordes filosos para garantizar máxima seguridad infantil en casa.</p>
+                </div>
+
+                <div class="glass-card p-5 rounded-2xl border-l-4 border-l-pink-400">
+                    <div class="text-xs font-mono text-pink-400">3. PALETA DE COLORES</div>
+                    <div class="flex items-center gap-2 mt-1">
+                        <span class="w-5 h-5 rounded-full bg-slate-100 border border-slate-300" title="Blanco Perlado"></span>
+                        <span class="w-5 h-5 rounded-full bg-slate-800" title="Negro Mate"></span>
+                        <span class="w-5 h-5 rounded-full bg-cyan-400 shadow-neon-cyan" title="Azul Cian Neón"></span>
+                        <span class="w-5 h-5 rounded-full bg-purple-500" title="Púrpura Neón"></span>
+                        <span class="text-xs text-white font-medium ml-2">Blanco Perlado, Negro Mate y Neón</span>
+                    </div>
+                </div>
+
+                <div class="glass-card p-5 rounded-2xl border-l-4 border-l-emerald-400">
+                    <div class="text-xs font-mono text-emerald-400">4. MATERIALES DE CONSTRUCCIÓN</div>
+                    <div class="text-sm font-semibold text-white mt-1">Fibra de carbono ultraligera, Titanio aeroespacial y Polímeros reciclados hipoalergénicos</div>
+                </div>
+            </div>
+
+            <!-- Interactive Component Inspector Output Panel -->
+            <div class="lg:col-span-7">
+                <div class="glass-card rounded-2xl p-6 border border-cyan-500/30 relative">
+                    <h3 class="text-lg font-orbitron font-bold text-white mb-4 flex items-center justify-between">
+                        <span class="flex items-center gap-2">
+                            <i class="fa-solid fa-microchip text-cyan-400"></i> Partes del Robot
+                        </span>
+                        <span class="text-xs font-mono text-cyan-400">HAZ CLIC EN CADA COMPONENTE</span>
+                    </h3>
+
+                    <!-- Component Buttons Grid -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 mb-6">
+                        <button onclick="inspectPart('pantalla')" id="partBtn-pantalla" class="part-tab-btn p-3 rounded-xl bg-slate-800/90 hover:bg-cyan-500/20 text-slate-300 hover:text-cyan-300 border border-slate-700 text-xs font-mono text-left transition-all active-part-btn">
+                            <i class="fa-solid fa-tv block text-base text-cyan-400 mb-1"></i>
+                            1. Pantalla OLED
+                        </button>
+                        <button onclick="inspectPart('sensores')" id="partBtn-sensores" class="part-tab-btn p-3 rounded-xl bg-slate-800/90 hover:bg-cyan-500/20 text-slate-300 hover:text-cyan-300 border border-slate-700 text-xs font-mono text-left transition-all">
+                            <i class="fa-solid fa-eye block text-base text-purple-400 mb-1"></i>
+                            2. LiDAR & Cámaras
+                        </button>
+                        <button onclick="inspectPart('brazos')" id="partBtn-brazos" class="part-tab-btn p-3 rounded-xl bg-slate-800/90 hover:bg-cyan-500/20 text-slate-300 hover:text-cyan-300 border border-slate-700 text-xs font-mono text-left transition-all">
+                            <i class="fa-solid fa-hand-back-fist block text-base text-pink-400 mb-1"></i>
+                            3. Brazos Biónicos
+                        </button>
+                        <button onclick="inspectPart('base')" id="partBtn-base" class="part-tab-btn p-3 rounded-xl bg-slate-800/90 hover:bg-cyan-500/20 text-slate-300 hover:text-cyan-300 border border-slate-700 text-xs font-mono text-left transition-all">
+                            <i class="fa-solid fa-[#00f3ff] fa-dharmachakra block text-base text-emerald-400 mb-1"></i>
+                            4. Base Omni-Ruedas
+                        </button>
+                        <button onclick="inspectPart('antenas')" id="partBtn-antenas" class="part-tab-btn p-3 rounded-xl bg-slate-800/90 hover:bg-cyan-500/20 text-slate-300 hover:text-cyan-300 border border-slate-700 text-xs font-mono text-left transition-all">
+                            <i class="fa-solid fa-tower-cell block text-base text-amber-400 mb-1"></i>
+                            5. Antenas Satelitales
+                        </button>
+                        <button onclick="inspectPart('reactor')" id="partBtn-reactor" class="part-tab-btn p-3 rounded-xl bg-slate-800/90 hover:bg-cyan-500/20 text-slate-300 hover:text-cyan-300 border border-slate-700 text-xs font-mono text-left transition-all">
+                            <i class="fa-solid fa-atom block text-base text-cyan-400 mb-1"></i>
+                            6. Núcleo Cuántico
+                        </button>
+                    </div>
+
+                    <!-- Dynamic Part Inspection Display -->
+                    <div id="inspectorDisplay" class="bg-slate-950/90 p-6 rounded-xl border border-cyan-500/30 transition-all min-h-[180px] flex flex-col justify-center">
+                        <!-- Populated via JS -->
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 3: FUNCIONES Y CAPACIDADES (INTERACTIVE SIMULATOR) -->
+    <section id="funciones" class="py-16 border-t border-slate-800/80 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <span class="text-cyan-400 font-mono text-xs tracking-widest uppercase font-bold">SECCIÓN 3</span>
+            <h2 class="text-3xl sm:text-4xl font-orbitron font-bold text-white mt-1">Funciones y Capacidades</h2>
+            <p class="text-slate-400 text-sm mt-2">Prueba las 5 funciones principales en tiempo real usando el simulador interactivo.</p>
+            <div class="w-16 h-1 bg-gradient-to-r from-cyan-400 to-purple-500 mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <!-- Interactive Function Selector Tabs -->
+        <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-8">
+            <button onclick="runFunctionSim('limpia')" id="funcBtn-limpia" class="func-tab p-4 rounded-2xl glass-card hover:bg-cyan-500/20 text-center transition-all border border-cyan-500/40 group active-func">
+                <i class="fa-solid fa-broom text-2xl text-cyan-400 group-hover:scale-110 transition-transform mb-2 block"></i>
+                <span class="font-orbitron font-bold text-white text-sm block">1. LIMPIA</span>
+                <span class="text-[10px] text-slate-400 font-mono">Ultrasonido & UV-C</span>
+            </button>
+
+            <button onclick="runFunctionSim('cocina')" id="funcBtn-cocina" class="func-tab p-4 rounded-2xl glass-card hover:bg-purple-500/20 text-center transition-all border border-slate-800 group">
+                <i class="fa-solid fa-utensils text-2xl text-purple-400 group-hover:scale-110 transition-transform mb-2 block"></i>
+                <span class="font-orbitron font-bold text-white text-sm block">2. COCINA</span>
+                <span class="text-[10px] text-slate-400 font-mono">Menús Saludables</span>
+            </button>
+
+            <button onclick="runFunctionSim('ensena')" id="funcBtn-ensena" class="func-tab p-4 rounded-2xl glass-card hover:bg-pink-500/20 text-center transition-all border border-slate-800 group">
+                <i class="fa-solid fa-graduation-cap text-2xl text-pink-400 group-hover:scale-110 transition-transform mb-2 block"></i>
+                <span class="font-orbitron font-bold text-white text-sm block">3. ENSEÑA</span>
+                <span class="text-[10px] text-slate-400 font-mono">Tutoría con IA</span>
+            </button>
+
+            <button onclick="runFunctionSim('protege')" id="funcBtn-protege" class="func-tab p-4 rounded-2xl glass-card hover:bg-emerald-500/20 text-center transition-all border border-slate-800 group">
+                <i class="fa-solid fa-shield-halved text-2xl text-emerald-400 group-hover:scale-110 transition-transform mb-2 block"></i>
+                <span class="font-orbitron font-bold text-white text-sm block">4. PROTEGE</span>
+                <span class="text-[10px] text-slate-400 font-mono">Vigilancia 24/7</span>
+            </button>
+
+            <button onclick="runFunctionSim('traduce')" id="funcBtn-traduce" class="func-tab p-4 rounded-2xl glass-card hover:bg-amber-500/20 text-center transition-all border border-slate-800 group col-span-2 sm:col-span-1">
+                <i class="fa-solid fa-[#00f3ff] fa-language text-2xl text-amber-400 group-hover:scale-110 transition-transform mb-2 block"></i>
+                <span class="font-orbitron font-bold text-white text-sm block">5. TRADUCE</span>
+                <span class="text-[10px] text-slate-400 font-mono">Simultáneo 50+ Idiomas</span>
+            </button>
+        </div>
+
+        <!-- Simulator Screen Monitor -->
+        <div class="glass-card rounded-3xl p-6 lg:p-8 border border-cyan-500/40 relative overflow-hidden">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 border-b border-slate-800 pb-4">
+                <div>
+                    <span id="simVerbBadge" class="px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 font-mono text-xs font-bold uppercase tracking-wider">
+                        VERBO PRESENTE: LIMPIA
+                    </span>
+                    <h3 id="simTitle" class="text-2xl font-orbitron font-bold text-white mt-1">Limpieza Profunda por Ultrasonidos y Luz UV-C</h3>
+                </div>
+                
+                <!-- Status metrics -->
+                <div class="flex items-center gap-4 font-mono text-xs">
+                    <div class="bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-800">
+                        <span class="text-slate-400">Eficiencia:</span>
+                        <span id="simEfficiency" class="text-emerald-400 font-bold ml-1">99.9%</span>
+                    </div>
+                    <div class="bg-slate-900 px-3 py-1.5 rounded-lg border border-slate-800">
+                        <span class="text-slate-400">Estado:</span>
+                        <span id="simStateText" class="text-cyan-400 font-bold ml-1">EJECUTANDO...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="mb-6">
+                <div class="flex justify-between text-xs font-mono text-slate-400 mb-1">
+                    <span>Avance de Tarea</span>
+                    <span id="simProgressPercent" class="text-cyan-400 font-bold">65%</span>
+                </div>
+                <div class="w-full h-3 bg-slate-900 rounded-full overflow-hidden p-0.5 border border-slate-800">
+                    <div id="simProgressBar" class="h-full bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 rounded-full transition-all duration-300" style="width: 65%;"></div>
+                </div>
+            </div>
+
+            <!-- Detailed Explanation & Console Log Output -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                <div class="md:col-span-7 space-y-3">
+                    <h4 class="text-sm font-mono text-cyan-400 uppercase font-semibold">¿Cómo ayuda a las personas?</h4>
+                    <p id="simDescription" class="text-slate-200 text-sm leading-relaxed">
+                        AURA-10 aspira de forma ultra silenciosa mediante tecnología de ondas ultrasónicas y elimina el 99.9% de gérmenes y bacterias con su lámpara germicida UV-C integrada. Libera a las familias de las tareas pesadas del hogar.
+                    </p>
+                    <div id="simHighlights" class="flex flex-wrap gap-2 pt-2">
+                        <span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 text-xs font-mono border border-slate-700">✓ Cero Ruido</span>
+                        <span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 text-xs font-mono border border-slate-700">✓ Autodetección de Manchas</span>
+                        <span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 text-xs font-mono border border-slate-700">✓ Esterilización UV-C</span>
+                    </div>
+                </div>
+
+                <!-- Animated Tech Terminal Screen -->
+                <div class="md:col-span-5 bg-slate-950 p-4 rounded-xl border border-slate-800 font-mono text-xs text-slate-300 space-y-2 relative">
+                    <div class="flex items-center justify-between text-[10px] text-slate-500 border-b border-slate-800 pb-1">
+                        <span>TERMINAL DE DIAGNÓSTICO</span>
+                        <span class="text-cyan-400">AURA-OS v4.2</span>
+                    </div>
+                    <div id="simConsoleLog" class="space-y-1.5 h-28 overflow-y-auto font-mono text-[11px]">
+                        <p class="text-cyan-400">[0.01s] Iniciando sensores de mapeo espacial...</p>
+                        <p class="text-emerald-400">[0.12s] Barrido ultrasónico activado a 40kHz.</p>
+                        <p class="text-purple-400">[0.35s] Desinfección UV-C en proceso continuo.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: DÓNDE, CUÁNDO Y QUIÉN -->
+    <section id="uso" class="py-16 border-t border-slate-800/80 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <span class="text-purple-400 font-mono text-xs tracking-widest uppercase font-bold">SECCIÓN 4</span>
+            <h2 class="text-3xl sm:text-4xl font-orbitron font-bold text-white mt-1">¿Dónde, Cuándo y Quién lo Usa?</h2>
+            <p class="text-slate-400 text-sm mt-2">Ámbitos de aplicación, horarios de funcionamiento y usuarios principales.</p>
+            <div class="w-16 h-1 bg-gradient-to-r from-purple-500 to-cyan-400 mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <!-- Dónde -->
+            <div class="glass-card rounded-2xl p-6 border border-cyan-500/20 relative group hover:border-cyan-400 transition-all">
+                <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-2xl mb-4">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <span class="text-xs font-mono text-cyan-400 font-bold uppercase">1. ¿DÓNDE FUNCIONA?</span>
+                <h3 class="text-xl font-orbitron font-bold text-white mt-1 mb-3">Hogares, Aulas y Hospitales</h3>
+                <ul class="space-y-2 text-xs text-slate-300">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-house text-cyan-400"></i> En casas particulares y pisos familiares.</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-school text-cyan-400"></i> En aulas escolares como asistente del profesor.</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-hospital text-cyan-400"></i> En salas de hospital para asistencia médica.</li>
+                </ul>
+            </div>
+
+            <!-- Cuándo -->
+            <div class="glass-card rounded-2xl p-6 border border-purple-500/20 relative group hover:border-purple-400 transition-all">
+                <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 text-2xl mb-4">
+                    <i class="fa-solid fa-clock"></i>
+                </div>
+                <span class="text-xs font-mono text-purple-400 font-bold uppercase">2. ¿CUÁNDO SE NECESITA?</span>
+                <h3 class="text-xl font-orbitron font-bold text-white mt-1 mb-3">24 Horas / 7 Días a la Semana</h3>
+                <ul class="space-y-2 text-xs text-slate-300">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-sun text-purple-400"></i> <strong>Por la mañana:</strong> Limpieza y preparación de desayunos.</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-book text-purple-400"></i> <strong>Por la tarde:</strong> Tutoría académica y deberes.</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-moon text-purple-400"></i> <strong>Por la noche:</strong> Vigilancia nocturna y emergencias.</li>
+                </ul>
+            </div>
+
+            <!-- Quién -->
+            <div class="glass-card rounded-2xl p-6 border border-pink-500/20 relative group hover:border-pink-400 transition-all">
+                <div class="w-12 h-12 rounded-xl bg-pink-500/10 border border-pink-500/30 flex items-center justify-center text-pink-400 text-2xl mb-4">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                <span class="text-xs font-mono text-pink-400 font-bold uppercase">3. ¿QUIÉN LO USA?</span>
+                <h3 class="text-xl font-orbitron font-bold text-white mt-1 mb-3">Toda la Familia y Especialistas</h3>
+                <ul class="space-y-2 text-xs text-slate-300">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-people-roof text-pink-400"></i> Familias con ritmo de vida activo.</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-child text-pink-400"></i> Estudiantes que necesitan refuerzo escolar.</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-user-nurse text-pink-400"></i> Personas mayores y médicos supervisores.</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PRESENTATION SLIDES VIEWER (POWERPOINT / CANVA SIMULATOR) -->
+    <section id="presentacion-ppt" class="py-16 border-t border-slate-800/80 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-10">
+            <span class="px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 font-mono text-xs font-bold uppercase">
+                <i class="fa-solid fa-file-powerpoint mr-1"></i> SIMULADOR DE DIAPOSITIVAS
+            </span>
+            <h2 class="text-3xl sm:text-4xl font-orbitron font-bold text-white mt-2">Presentación de Diapositivas para el Profesor</h2>
+            <p class="text-slate-400 text-sm mt-2">Puedes navegar por la presentación directamente aquí o abrirla en pantalla completa.</p>
+        </div>
+
+        <!-- Slide Presentation Viewer Card -->
+        <div class="glass-card rounded-3xl p-6 md:p-8 border border-purple-500/40 shadow-glow-lg max-w-4xl mx-auto">
+            
+            <!-- Controls Bar Top -->
+            <div class="flex justify-between items-center pb-4 mb-6 border-b border-slate-800">
+                <div class="flex items-center gap-2">
+                    <span id="slideCounterBadge" class="px-3 py-1 rounded-lg bg-purple-500/20 text-purple-300 font-mono text-xs font-bold">
+                        Diapositiva 1 de 6
+                    </span>
+                    <span id="slideTitleHeader" class="text-sm font-orbitron text-slate-300 hidden sm:inline">
+                        1. Identificación del Robot
+                    </span>
+                </div>
+
+                <button onclick="openFullscreenPresentation()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-400 text-xs font-mono transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-expand"></i> Pantalla Completa
+                </button>
+            </div>
+
+            <!-- Active Slide Body Area -->
+            <div id="activeSlideCard" class="bg-slate-950 p-6 sm:p-10 rounded-2xl border border-slate-800 min-h-[320px] flex flex-col justify-between relative overflow-hidden transition-all">
+                <!-- Slide content rendered dynamically via JavaScript -->
+            </div>
+
+            <!-- Slide Navigation Buttons Bottom -->
+            <div class="flex justify-between items-center pt-6 mt-4">
+                <button onclick="prevSlide()" class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-mono text-xs transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-chevron-left"></i> Anterior
+                </button>
+
+                <!-- Dots indicator -->
+                <div id="slideDotsContainer" class="flex gap-2">
+                    <!-- Dots dynamically created -->
+                </div>
+
+                <button onclick="nextSlide()" class="px-5 py-2.5 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-mono font-bold text-xs transition-all flex items-center gap-2 shadow-neon-cyan">
+                    Siguiente <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 5: CONCLUSIÓN PERSONAL -->
+    <section id="conclusion" class="py-16 border-t border-slate-800/80 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <span class="text-pink-400 font-mono text-xs tracking-widest uppercase font-bold">SECCIÓN 5</span>
+            <h2 class="text-3xl sm:text-4xl font-orbitron font-bold text-white mt-1">Conclusión Personal</h2>
+            <p class="text-slate-400 text-sm mt-2">Reflexión sobre los motivos de creación y los aspectos más destacados de la invención.</p>
+            <div class="w-16 h-1 bg-gradient-to-r from-pink-500 to-purple-500 mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            
+            <!-- Why created -->
+            <div class="glass-card rounded-2xl p-8 border border-pink-500/30 relative">
+                <div class="w-12 h-12 rounded-xl bg-pink-500/10 border border-pink-500/30 flex items-center justify-center text-pink-400 text-2xl mb-4">
+                    <i class="fa-solid fa-lightbulb"></i>
+                </div>
+                <h3 class="text-xs font-mono text-pink-400 uppercase font-bold">1. ¿Por qué he creado este robot?</h3>
+                <h4 class="text-xl font-orbitron font-bold text-white mt-1 mb-3">Para Mejorar la Calidad de Vida de las Personas</h4>
+                <p class="text-slate-300 text-sm leading-relaxed">
+                    Creé a <strong>AURA-10</strong> porque imagino un futuro donde la tecnología no reemplace a las personas, sino que las libere del estrés del trabajo doméstico, cuide de nuestros adultos mayores y brinde a los niños un tutor interactivo y seguro sin pantallas frías.
+                </p>
+            </div>
+
+            <!-- What I like most -->
+            <div class="glass-card rounded-2xl p-8 border border-cyan-500/30 relative">
+                <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-2xl mb-4">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <h3 class="text-xs font-mono text-cyan-400 uppercase font-bold">2. ¿Qué es lo que más me gusta de mi invención?</h3>
+                <h4 class="text-xl font-orbitron font-bold text-white mt-1 mb-3">Su Empatía y Versatilidad Tri-Propósito</h4>
+                <p class="text-slate-300 text-sm leading-relaxed">
+                    Lo que más me fascina de AURA-10 es su <strong>pantalla facial emocional</strong> capaz de expresar afecto y alegría, junto con su capacidad de aprender de los gustos de cada miembro de la familia para adaptarse a sus necesidades cambiantes.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-12 border-t border-slate-800/80 bg-slate-950/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+            <div class="flex justify-center items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-cyan-400 to-purple-600 flex items-center justify-center text-slate-950 font-bold">
+                    <i class="fa-solid fa-robot text-sm"></i>
+                </div>
+                <span class="font-orbitron font-bold text-lg text-white">AURA-10</span>
+            </div>
+            <p class="text-slate-400 text-xs font-mono max-w-lg mx-auto">
+                Proyecto de Exposición Escolar — Presentado ante el Profesor. Creado con tecnología HTML5, Tailwind CSS y Web Audio Synthesizer.
+            </p>
+            <div class="text-[11px] text-cyan-400/70 font-mono">
+                EVALUACIÓN DESEADA: <span class="text-cyan-300 font-bold">SOBRESALIENTE 10/10</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- FULLSCREEN SLIDES MODAL -->
+    <div id="slideModal" class="fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-2xl flex flex-col justify-between p-6 hidden">
+        <div class="flex justify-between items-center pb-4 border-b border-slate-800">
+            <div class="flex items-center gap-3">
+                <span class="w-3 h-3 rounded-full bg-cyan-400 animate-pulse"></span>
+                <span class="font-orbitron font-bold text-white text-lg">AURA-10 — MODO EXPOSICIÓN SLIDES</span>
+            </div>
+            <button onclick="closeFullscreenPresentation()" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm">
+                <i class="fa-solid fa-xmark text-lg"></i> Cerrar (Esc)
+            </button>
+        </div>
+
+        <div id="modalSlideBody" class="my-auto max-w-5xl mx-auto w-full glass-card p-8 sm:p-12 rounded-3xl border border-cyan-500/40">
+            <!-- Modal Slide Content dynamically filled -->
+        </div>
+
+        <div class="flex justify-between items-center pt-4 border-t border-slate-800 max-w-5xl mx-auto w-full">
+            <button onclick="prevSlide()" class="px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-mono text-xs">
+                <i class="fa-solid fa-chevron-left mr-1"></i> Anterior
+            </button>
+            <span id="modalSlideCounter" class="font-mono text-cyan-400 text-xs">Slide 1 / 6</span>
+            <button onclick="nextSlide()" class="px-6 py-3 rounded-xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold font-mono text-xs">
+                Siguiente <i class="fa-solid fa-chevron-right ml-1"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        /* ----------------------------------------------------
+           1. WEB AUDIO API SYNTHESIZER (No external sound files)
+           ---------------------------------------------------- */
+        let audioCtx = null;
+        let isMuted = false;
+
+        function initAudio() {
+            if (!audioCtx) {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                audioCtx = new AudioContext();
+            }
+        }
+
+        function playAudio(type) {
+            if (isMuted) return;
+            try {
+                initAudio();
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+
+                const now = audioCtx.currentTime;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                if (type === 'beep') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(880, now);
+                    osc.frequency.exponentialRampToValueAtTime(1200, now + 0.1);
+                    gain.gain.setValueAtTime(0.1, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+                    osc.start(now);
+                    osc.stop(now + 0.1);
+                } else if (type === 'click') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(440, now);
+                    osc.frequency.exponentialRampToValueAtTime(220, now + 0.05);
+                    gain.gain.setValueAtTime(0.08, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.05);
+                    osc.start(now);
+                    osc.stop(now + 0.05);
+                } else if (type === 'scan') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(300, now);
+                    osc.frequency.linearRampToValueAtTime(900, now + 0.2);
+                    gain.gain.setValueAtTime(0.06, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+                    osc.start(now);
+                    osc.stop(now + 0.2);
+                } else if (type === 'success') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(523.25, now); // C5
+                    osc.frequency.setValueAtTime(659.25, now + 0.08); // E5
+                    osc.frequency.setValueAtTime(783.99, now + 0.16); // G5
+                    gain.gain.setValueAtTime(0.08, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+                    osc.start(now);
+                    osc.stop(now + 0.3);
+                }
+            } catch (e) {
+                console.log('Audio Context Error:', e);
+            }
+        }
+
+        function toggleMute() {
+            isMuted = !isMuted;
+            const icon = document.getElementById('audioIcon');
+            if (isMuted) {
+                icon.className = 'fa-solid fa-volume-xmark text-red-400';
+            } else {
+                icon.className = 'fa-solid fa-volume-high text-cyan-400';
+                playAudio('beep');
+            }
+        }
+
+        /* ----------------------------------------------------
+           2. INTERACTIVE ROBOT REACTION
+           ---------------------------------------------------- */
+        const robotPhrases = [
+            '"¡Hola! Estoy listo para ayudarte en el hogar y tus deberes."',
+            '"Iniciando diagnóstico... Batería al 99.8%. Todos los sistemas normales."',
+            '"¿Sabías que puedo traducir más de 50 idiomas en tiempo real?"',
+            '"Modo Limpieza ultrasónica preparado. Cero bacterias detectadas."',
+            '"¡Profe! Este proyecto merece un Sobresaliente 10/10."'
+        ];
+        let phraseIdx = 0;
+
+        function triggerRobotReaction() {
+            playAudio('success');
+            phraseIdx = (phraseIdx + 1) % robotPhrases.length;
+            document.getElementById('robotReactionText').innerText = robotPhrases[phraseIdx];
+            
+            // Visual Animation Pulse
+            const reactor = document.getElementById('chestReactor');
+            if (reactor) {
+                reactor.setAttribute('fill', '#ec4899');
+                setTimeout(() => reactor.setAttribute('fill', '#00f3ff'), 600);
+            }
+            
+            const mouth = document.getElementById('faceMouth');
+            if (mouth) {
+                mouth.setAttribute('d', 'M 90 65 Q 100 75 110 65');
+                setTimeout(() => mouth.setAttribute('d', 'M 93 67 Q 100 71 107 67'), 800);
+            }
+        }
+
+        /* ----------------------------------------------------
+           3. SECTION 2: PHYSICAL INSPECTOR DATA
+           ---------------------------------------------------- */
+        const partsData = {
+            pantalla: {
+                title: "1. Pantalla Facial OLED Interactiva",
+                desc: "Ubicada en la cabeza del robot. Muestra rostros emocionales empáticos, indicaciones de voz, gráficos educativos interactivos y alertas médicas.",
+                spec: "Panel curvo flexible OLED de 10 pulgadas con cristal anti-rayaduras.",
+                badge: "INTERFAZ EMOCIONAL",
+                color: "text-cyan-400"
+            },
+            sensores: {
+                title: "2. Sensores LiDAR 360° y Cámaras 4K",
+                desc: "Ubicados en la zona frontal y superior. Generan un mapa en 3D de la casa en tiempo real para evitar cualquier colisión con personas o mascotas.",
+                spec: "Escáner láser LiDAR de alta frecuencia + Detección infrarroja nocturna.",
+                badge: "VISIÓN 3D Y NAVEGACIÓN",
+                color: "text-purple-400"
+            },
+            brazos: {
+                title: "3. Brazos Biónicos Soft-Touch",
+                desc: "Dos articulaciones biónicas con 7 grados de libertad. Pueden sostener desde un huevo fresco con delicadeza hasta objetos de 20 kg con firmeza.",
+                spec: "Servotores silenciosos con sensores de presión tactil en los dedos.",
+                badge: "PRECISIÓN ARTICULAR",
+                color: "text-pink-400"
+            },
+            base: {
+                title: "4. Base con Ruedas Omnidireccionales",
+                desc: "Permite un desplazamiento suave en 360° en cualquier dirección sobre alfombra, parqué o baldosas, sin hacer ruido ni rayar el suelo.",
+                spec: "Ruedas Mecanum magnéticas de respuesta instantánea.",
+                badge: "MOVILIDAD SILENCIOSA",
+                color: "text-emerald-400"
+            },
+            antenas: {
+                title: "5. Antenas de Conexión Satelital 6G",
+                desc: "Proporcionan acceso instantáneo a Internet de ultra alta velocidad para descargar traducciones, enciclopedias educativas y recetas de cocina.",
+                spec: "Módulo Wi-Fi 7 y conectividad satelital de baja latencia.",
+                badge: "CONECTIVIDAD TOTAL",
+                color: "text-amber-400"
+            },
+            reactor: {
+                title: "6. Núcleo Cuántico y Batería de Grafeno",
+                desc: "Ubicado en el pecho. Proporciona hasta 24 horas continuas de energía y realiza trillones de cálculos por segundo mediante IA local segura.",
+                spec: "Batería de estado sólido de grafeno con recarga inalámbrica en 15 min.",
+                badge: "ENERGÍA LIMPIA 24H",
+                color: "text-cyan-400"
+            }
+        };
+
+        function inspectPart(partKey) {
+            playAudio('click');
+            const data = partsData[partKey];
+            if (!data) return;
+
+            // Highlight Active Button
+            document.querySelectorAll('.part-tab-btn').forEach(btn => {
+                btn.classList.remove('border-cyan-400', 'bg-cyan-500/20');
+            });
+            const activeBtn = document.getElementById(`partBtn-${partKey}`);
+            if (activeBtn) {
+                activeBtn.classList.add('border-cyan-400', 'bg-cyan-500/20');
+            }
+
+            // Render Output
+            const container = document.getElementById('inspectorDisplay');
+            container.innerHTML = `
+                <div class="flex items-center gap-3 mb-2">
+                    <span class="px-2.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 font-mono text-[10px] font-bold">${data.badge}</span>
+                    <h4 class="text-xl font-orbitron font-bold text-white">${data.title}</h4>
+                </div>
+                <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">${data.desc}</p>
+                <div class="mt-3 text-xs font-mono ${data.color}">
+                    <i class="fa-solid fa-circle-check mr-1"></i> Especificación: ${data.spec}
+                </div>
+            `;
+        }
+
+        /* ----------------------------------------------------
+           4. SECTION 3: LIVE FUNCTION SIMULATOR DATA
+           ---------------------------------------------------- */
+        const functionsData = {
+            limpia: {
+                verb: "VERBO PRESENTE: LIMPIA",
+                title: "Limpieza Profunda por Ultrasonidos y Luz UV-C",
+                desc: "AURA-10 aspira de forma ultra silenciosa mediante tecnología de ondas ultrasónicas y elimina el 99.9% de gérmenes y bacterias con su lámpara germicida UV-C integrada. Libera a las familias de las tareas pesadas.",
+                efficiency: "99.9%",
+                progress: 85,
+                logs: [
+                    "[0.01s] Mapeo de superficie completado.",
+                    "[0.15s] Aspirado ultrasónico a 40kHz en marcha.",
+                    "[0.40s] Lámpara UV-C activa: Desinfección completa."
+                ],
+                tags: ["✓ Cero Ruido", "✓ Detección de Manchas", "✓ Esterilización UV-C"]
+            },
+            cocina: {
+                verb: "VERBO PRESENTE: COCINA",
+                title: "Preparación de Menús Saludables y Dietas Personalizadas",
+                desc: "Analiza los ingredientes disponibles en la nevera y cocina platos nutritivos adaptados a las alergias o preferencias de cada miembro de la familia, controlando el tiempo y las calorías exactas.",
+                efficiency: "100%",
+                progress: 60,
+                logs: [
+                    "[0.05s] Análisis de macronutrientes activado.",
+                    "[0.22s] Ajustando temperatura de cocción inductiva.",
+                    "[0.50s] Plato gourmet rico en proteínas listo."
+                ],
+                tags: ["✓ Control de Calorías", "✓ Recetas Saludables", "✓ Cero Desperdicio"]
+            },
+            ensena: {
+                verb: "VERBO PRESENTE: ENSEÑA",
+                title: "Tutoría Interactiva de Idiomas, Matemáticas y Ciencias",
+                desc: "Ayuda a los estudiantes con sus deberes escolares explicando conceptos complejos con holografías, juegos interactivos y ejercicios adaptados al ritmo de cada alumno.",
+                efficiency: "98.5%",
+                progress: 90,
+                logs: [
+                    "[0.02s] Cargando módulo curricular de ciencias.",
+                    "[0.18s] Generando holograma explicativo 3D.",
+                    "[0.38s] Ejercicio interactivo completado con éxito."
+                ],
+                tags: ["✓ IA Adaptativa", "✓ Explicaciones 3D", "✓ Paciencia Infinita"]
+            },
+            protege: {
+                verb: "VERBO PRESENTE: PROTEGE",
+                title: "Vigilancia del Hogar 24/7 y Alertas de Emergencia",
+                desc: "Monitorea constantemente la casa para detectar fugas de gas, humo o presencia de extraños. Si ocurre un accidente, avisa inmediatamente a los servicios de emergencia y a los familiares.",
+                efficiency: "100%",
+                progress: 100,
+                logs: [
+                    "[0.01s] Escáner térmico y infrarrojo vigilando.",
+                    "[0.10s] Cero humo o fuga de gas detectada.",
+                    "[0.30s] Perímetro del hogar 100% seguro."
+                ],
+                tags: ["✓ Detección de Humo/Gas", "✓ Llamada a Emergencias", "✓ Visión Nocturna"]
+            },
+            traduce: {
+                verb: "VERBO PRESENTE: TRADUCE",
+                title: "Traducción Simultánea en Vivo en +50 Idiomas",
+                desc: "Escucha a personas hablando en diferentes idiomas (Español, Inglés, Francés, Chino, Italiano, etc.) y reproduce la traducción al instante mediante su altavoz o subtítulos en su pantalla OLED.",
+                efficiency: "99.2%",
+                progress: 75,
+                logs: [
+                    "[0.03s] Entrada de audio multilingüe recibida.",
+                    "[0.12s] Procesamiento de lenguaje natural (NLP).",
+                    "[0.25s] Traducción en vivo generada sin latencia."
+                ],
+                tags: ["✓ Mas de 50 Idiomas", "✓ Voz Natural", "✓ Subtítulos OLED"]
+            }
+        };
+
+        function runFunctionSim(funcKey) {
+            playAudio('scan');
+            const f = functionsData[funcKey];
+            if (!f) return;
+
+            // Highlight tab button
+            document.querySelectorAll('.func-tab').forEach(b => b.classList.remove('border-cyan-400', 'bg-cyan-500/20'));
+            const activeTab = document.getElementById(`funcBtn-${funcKey}`);
+            if (activeTab) activeTab.classList.add('border-cyan-400', 'bg-cyan-500/20');
+
+            // Update simulator screen
+            document.getElementById('simVerbBadge').innerText = f.verb;
+            document.getElementById('simTitle').innerText = f.title;
+            document.getElementById('simDescription').innerText = f.desc;
+            document.getElementById('simEfficiency').innerText = f.efficiency;
+            document.getElementById('simProgressPercent').innerText = f.progress + '%';
+            document.getElementById('simProgressBar').style.width = f.progress + '%';
+
+            // Highlights
+            const hlContainer = document.getElementById('simHighlights');
+            hlContainer.innerHTML = f.tags.map(t => `<span class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 text-xs font-mono border border-slate-700">${t}</span>`).join('');
+
+            // Console log animation
+            const logBox = document.getElementById('simConsoleLog');
+            logBox.innerHTML = '';
+            f.logs.forEach((log, index) => {
+                setTimeout(() => {
+                    const p = document.createElement('p');
+                    p.className = index === 0 ? 'text-cyan-400' : (index === 1 ? 'text-purple-400' : 'text-emerald-400');
+                    p.innerText = log;
+                    logBox.appendChild(p);
+                }, index * 200);
+            });
+        }
+
+        /* ----------------------------------------------------
+           5. PRESENTATION SLIDES VIEWER LOGIC (PPT SIMULATOR)
+           ---------------------------------------------------- */
+        const slides = [
+            {
+                number: "Diapositiva 1 de 6",
+                section: "1. IDENTIFICACIÓN DEL ROBOT",
+                title: "Presentación del Prototipo AURA-10",
+                bullets: [
+                    "<strong>Nombre oficial:</strong> AURA-10 (Asistente Universal Robótico Avanzado).",
+                    "<strong>Categoría:</strong> Robot Doméstico, Educativo y Médico.",
+                    "<strong>Tipo de robot:</strong> Humanoide biónico montado sobre base omnidireccional.",
+                    "<strong>Presentado por:</strong> Estudiante (Evaluación Sobresaliente)."
+                ],
+                footer: "AURA-10 — Proyecto Escolar de Robótica"
+            },
+            {
+                number: "Diapositiva 2 de 6",
+                section: "2. DESCRIPCIÓN FÍSICA (Parte I)",
+                title: "Aspecto, Tamaño, Forma y Color",
+                bullets: [
+                    "<strong>Tamaño:</strong> Mediano (1.50 metros de altura, peso ligero de 45 kg).",
+                    "<strong>Forma:</strong> Estructura humanoide ergonómica con curvas suaves sin bordes filosos.",
+                    "<strong>Color:</strong> Blanco perlado futurista con detalles en negro mate y luces LED en cian neón.",
+                    "<strong>Estética:</strong> Estilo limpio y tecnológico tipo nave espacial."
+                ],
+                footer: "Anatomía Externa de AURA-10"
+            },
+            {
+                number: "Diapositiva 3 de 6",
+                section: "2. DESCRIPCIÓN FÍSICA (Parte II)",
+                title: "Partes Principales y Materiales",
+                bullets: [
+                    "<strong>Partes:</strong> Pantalla facial OLED, 2 brazos articulares, sensores LiDAR 360°, ruedas omnidireccionales y antenas 6G.",
+                    "<strong>Materiales:</strong> Fibra de carbono ultraligera, titanio aeroespacial y polímeros reciclados.",
+                    "<strong>Resistencia:</strong> Alta durabilidad contra golpes e hipoalergénico para niños."
+                ],
+                footer: "Estructura y Componentes Internos"
+            },
+            {
+                number: "Diapositiva 4 de 6",
+                section: "3. FUNCIONES Y CAPACIDADES",
+                title: "Las 5 Funciones Principales (Verbos en Presente)",
+                bullets: [
+                    "<strong>1. LIMPIA:</strong> Aspira sin ruido y esteriliza superficies con luz UV-C.",
+                    "<strong>2. COCINA:</strong> Prepara menús saludables personalizados.",
+                    "<strong>3. ENSEÑA:</strong> Imparte tutorías interactivas de idiomas y matemáticas.",
+                    "<strong>4. PROTEGE:</strong> Vigila la casa 24/7 y alerta en emergencias.",
+                    "<strong>5. TRADUCE:</strong> Traduce simultáneamente en más de 50 idiomas."
+                ],
+                footer: "Capacidades Operativas en Tiempo Real"
+            },
+            {
+                number: "Diapositiva 5 de 6",
+                section: "4. DÓNDE Y CUÁNDO SE USA",
+                title: "Entorno de Funcionamiento y Usuarios",
+                bullets: [
+                    "<strong>¿Dónde?:</strong> En casas particulares, aulas escolares, hospitales y centros comunitarios.",
+                    "<strong>¿Cuándo?:</strong> Todos los días (24/7), especialmente en labores matutinas, estudio por las tardes y guardia nocturna.",
+                    "<strong>¿Quién lo usa?:</strong> Familias, estudiantes de todas las edades, ancianos y personal médico."
+                ],
+                footer: "Ámbito de Aplicación Cotidiana"
+            },
+            {
+                number: "Diapositiva 6 de 6",
+                section: "5. CONCLUSIÓN PERSONAL",
+                title: "¿Por qué se creó y qué es lo que más me gusta?",
+                bullets: [
+                    "<strong>¿Por qué lo he creado?:</strong> Para hacer la vida diaria más fácil, segura y divertida a las familias, uniendo tecnología limpia e inteligencia humana.",
+                    "<strong>¿Qué es lo que más me gusta?:</strong> Su pantalla de expresiones faciales que lo hace muy amigable y su capacidad de aprender de los gustos de las personas."
+                ],
+                footer: "Reflexión Final del Inventor"
+            }
+        ];
+
+        let currentSlideIndex = 0;
+
+        function renderSlide() {
+            const slide = slides[currentSlideIndex];
+            
+            // Header info
+            document.getElementById('slideCounterBadge').innerText = slide.number;
+            document.getElementById('slideTitleHeader').innerText = slide.section;
+
+            // Render Card Body
+            const card = document.getElementById('activeSlideCard');
+            card.innerHTML = `
+                <div>
+                    <span class="text-xs font-mono text-cyan-400 uppercase tracking-widest block mb-1">${slide.section}</span>
+                    <h3 class="text-2xl sm:text-3xl font-orbitron font-bold text-white mb-6">${slide.title}</h3>
+                    <ul class="space-y-3 text-slate-200 text-sm sm:text-base leading-relaxed">
+                        ${slide.bullets.map(b => `<li class="flex items-start gap-3"><i class="fa-solid fa-chevron-right text-cyan-400 mt-1 text-xs"></i><span>${b}</span></li>`).join('')}
+                    </ul>
+                </div>
+                <div class="pt-6 mt-6 border-t border-slate-800 flex justify-between items-center text-xs font-mono text-slate-400">
+                    <span>${slide.footer}</span>
+                    <span class="text-purple-400">AURA-10 PRESENTACIÓN</span>
+                </div>
+            `;
+
+            // Modal Body synced
+            const modalBody = document.getElementById('modalSlideBody');
+            if (modalBody) {
+                modalBody.innerHTML = card.innerHTML;
+            }
+            document.getElementById('modalSlideCounter').innerText = `${currentSlideIndex + 1} / ${slides.length}`;
+
+            // Render dots
+            const dotsContainer = document.getElementById('slideDotsContainer');
+            dotsContainer.innerHTML = slides.map((_, i) => `
+                <button onclick="goToSlide(${i})" class="w-2.5 h-2.5 rounded-full transition-all ${i === currentSlideIndex ? 'bg-cyan-400 w-6' : 'bg-slate-700 hover:bg-slate-500'}"></button>
+            `).join('');
+        }
+
+        function nextSlide() {
+            playAudio('click');
+            currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+            renderSlide();
+        }
+
+        function prevSlide() {
+            playAudio('click');
+            currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+            renderSlide();
+        }
+
+        function goToSlide(idx) {
+            playAudio('click');
+            currentSlideIndex = idx;
+            renderSlide();
+        }
+
+        function openFullscreenPresentation() {
+            playAudio('beep');
+            document.getElementById('slideModal').classList.remove('hidden');
+            renderSlide();
+        }
+
+        function closeFullscreenPresentation() {
+            playAudio('click');
+            document.getElementById('slideModal').classList.add('hidden');
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeFullscreenPresentation();
+            }
+        });
+
+        /* ----------------------------------------------------
+           6. INITIALIZATION ON WINDOW LOAD
+           ---------------------------------------------------- */
+        window.onload = function() {
+            inspectPart('pantalla');
+            runFunctionSim('limpia');
+            renderSlide();
+        };
+    </script>
+</body>
+</html>
